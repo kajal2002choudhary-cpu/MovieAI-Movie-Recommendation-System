@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+
+
+{% block content %}
+
+
+
+<div class="hero-container">
+
+
+
+     <div class="col-md-4">
+
+            <img src="{{ poster }}" class="detail-poster" height="400px">
+
+        </div>
+
+    <div class="hero-content container">
+
+
+
+        <h1 class="title">{{ title }}</h1>
+
+
+
+        <p class="meta">
+
+            ⭐ {{ rating }} | 📅 {{ year }}
+
+        </p>
+
+
+
+        <p class="overview">
+
+            {{ overview }}
+
+        </p>
+
+
+
+        <div class="buttons">
+
+
+
+
+
+
+
+            <a href="/add-watchlist/{{ movie_id }}/{{ title }}/"
+               class="btn btn-outline-light">
+                Add to Watchlist
+            </a>
+
+
+
+        </div>
+
+
+
+    </div>
+
+
+
+</div>
+
+
+
+{% endblock %}

@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="text-center py-5">
+
+    <h1 class="fw-bold">Find Movies You'll Love 🎥</h1>
+    <p class="text-muted">AI-powered recommendations</p>
+
+    <form action="/recommend/" method="get" class="mt-4">
+
+  <input type="text"
+       id="movieInput"
+       name="movie"
+       class="form-control"
+       placeholder="Search movie...">
+
+<div id="suggestions"></div>
+
+    <button type="submit" class="btn btn-danger mt-3 w-100">
+        Get Recommendations
+    </button>
+
+</form>
+
+</div>
+<script>
+const input = document.getElementById("movieInput");
+const box = document.getElementById("suggestions");
+
+input.addEventListener("keyup", function () {
+
+    let query = input.value;
+
+    if (query.length < 2) {
+        box.innerHTML = "";
+        return;
+    }
+
+    fetch(`/autocomplete/?q=${query}`)
+        .then(res => res.json())
+        .then(data => {
+
+            box.innerHTML = "";
+
+            data.forEach(movie => {
+
+                let div = document.createElement("div");
+
+                div.innerHTML = movie;
+                div.classList.add("list-group-item", "bg-dark", "text-white");
+                div.style.cursor = "pointer";
+
+                div.onclick = function () {
+                    input.value = movie;
+                    box.innerHTML = "";
+                };
+
+                box.appendChild(div);
+            });
+
+        })
+        .catch(err => console.log("Autocomplete error:", err));
+});
+</script>
+{% endblock %}

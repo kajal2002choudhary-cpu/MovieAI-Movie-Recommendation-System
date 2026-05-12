@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2>🔥 Trending Movies</h2>
+
+<div class="row">
+
+{% for movie in movies %}
+
+<div class="col-md-3 mb-4">
+
+    <div class="movie-card">
+
+        <img src="{{ movie.poster }}" class="img-fluid">
+
+        <div class="p-2 text-center">
+
+            <h6>{{ movie.title }}</h6>
+
+            <a href="/movie/{{ movie.id }}/"
+       class="btn btn-sm btn-primary mt-2">
+        🎬 View
+    </a>
+
+    <!-- Add to Watchlist -->
+    <a href="/add-watchlist/{{ movie.id }}/{{ movie.title|urlencode }}/"
+       class="btn btn-sm btn-danger mt-2">
+        ❤️ Watchlist
+    </a>
+
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+{% endblock %}

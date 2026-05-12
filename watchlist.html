@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container">
+
+    <h2 class="page-title">❤️ My Watchlist</h2>
+
+    {% if movies %}
+
+    <div class="row g-3">
+
+        {% for movie in movies %}
+
+        <div class="col-6 col-md-3 col-lg-2">
+
+            <div class="movie-tile">
+
+                <!-- Poster -->
+                <img src="{{ movie.poster }}" class="poster">
+
+                <!-- Hover overlay -->
+                <div class="overlay">
+
+                    <div class="title">{{ movie.title }}</div>
+
+                    <div class="actions">
+
+                        {% if movie.trailer %}
+                        <a href="{{ movie.trailer }}" target="_blank" class="btn btn-sm btn-primary">
+                            🎬 View
+                        </a>
+                        {% else %}
+                        <a href="{% url 'movie_detail' movie.movie_id %}" class="btn btn-sm btn-primary">
+                            🎬 View
+                        </a>
+                        {% endif %}
+
+                        <a href="{% url 'remove_watchlist' movie.movie_id %}"
+                           class="btn btn-sm btn-danger mt-1">
+                            ❌ Remove
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+    {% else %}
+
+    <div class="empty-box text-center">
+
+        <h4>No movies in your watchlist</h4>
+        <p>Start adding movies you love ❤️</p>
+
+        <a href="/" class="btn btn-danger mt-2">
+            Discover Movies
+        </a>
+
+    </div>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}

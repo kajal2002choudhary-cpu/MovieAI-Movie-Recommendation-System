@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2 class="mb-4">Recommended Movies</h2>
+
+<div class="row">
+
+{% for movie in movies %}
+
+<div class="col-md-3 mb-4">
+
+    <div class="card bg-dark text-white movie-card">
+
+        <img src="{{ movie.poster }}" class="card-img-top">
+
+        <div class="card-body text-center">
+
+         <a href="{% url 'movie_detail' movie.movie_id %}">
+
+    <h6>{{ movie.title }}</h6>
+</a>
+
+            
+        </div>
+
+    </div>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+<style>
+.movie-card {
+    border: 1px solid #2a2a2a;
+    transition: 0.3s;
+}
+
+.movie-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(229,9,20,0.3);
+}
+</style>
+
+{% endblock %}
